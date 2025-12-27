@@ -3,6 +3,7 @@ require("dotenv").config();
 const express= require("express");
 const cors= require("cors");
 const Contact= require("./models/contact");
+const connectDB= require("./db");
 
 const app= express();
 const PORT=3003;
@@ -30,7 +31,10 @@ app.post("/api/contact", async (req,res) => {
         res.json({ message:"error al guardar contacto."});
     }
 });
+(async ()=>{
+    await connectDB();
 
-app.listen(PORT, ()=>
+    app.listen(PORT, ()=>
     console.log(`backend corriendo en http://localhost:${PORT}`)
-);
+    );
+})();
