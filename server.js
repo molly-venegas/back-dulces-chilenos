@@ -16,9 +16,10 @@ app.post("/api/contact", async (req,res) => {
     console.log("body:",req.body);
 
     try {
-        const {name, message}=req.body;
+        const {name, email, message}=req.body;
         const contact= new Contact({
             name,
+            email,
             message
         });
         await contact.save();
