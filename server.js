@@ -37,25 +37,26 @@ app.post("/api/contact", async (req,res) => {
 
 //aqui se define el endpoint para el formulario de pedido
 app.post("/api/pedido", async (req,res) => {
+    /*
     console.log("pedido recibido");
     console.log("body:",req.body);
+    */
 
-     /*try {
-        const {nombre, direccion, telefono}=req.body;
-        const pedido= new Pedido({
-            nombre,
-            direccion,
-            telefono
+    try {
+        const pedidoRecibido = req.body;
+        const pedido = new Pedido(pedidoRecibido);
+        const pedidoCreado = await pedido.save();
+
+        res.json({ 
+            message:"pedido guardado con exito.",
+            pedido: pedidoCreado
         });
-        await pedido.save();
-
-        res.json({ message:"pedido guardado con exito."});
 
     } catch (error) {
         console.log ("error en el guardado.", error);
 
         res.json({ message:"error al guardar pedido."});
-    }*/
+    }
 });
 
 //aqui se enciende el backend
